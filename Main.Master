@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="BanhangOffline.Main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>ABC Shop</title>
+    <link rel="stylesheet" href="css/site.css" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <header id="header">
+        <h1><%=Page.Title %></h1>
+    </header>
+    <form id="form1" runat="server">
+            <div class="myrow">
+                    <div class="mycol-8">
+                            <a href="default.aspx">Trang chủ</a>
+                            <a href="#">Lien he</a>
+                            <a href="Quanly.aspx"><asp:Label ID="Quanly" runat="server" Text="Quan ly"/></a>
+                    </div>
+                    <div class="mycol-3">
+                            <asp:LinkButton ID="LoginBtn" runat="server" Text="Login" OnClick="LoginBtn_Click"/>
+                            <asp:LinkButton ID="LogouBtn" runat="server" Text="Logout" OnClick="LogouBtn_Click"/>
+                            <asp:Label ID="CurrentUser" runat="server" Text="" ></asp:Label>
+                    </div>
+            </div>
+            <div class="myrow">
+                <div class="mycol-8">
+                    <asp:ContentPlaceHolder ID="Noidung" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+
+                <div class="mycol-3">
+                    <h1>news</h1>
+                    <a href="#"><p>creating HTML website</p></a>
+                    <a href="#"><p>learn CSS</p></a>
+                    <a href="#">learn C#</a>
+                </div>
+            </div>
+    </form>
+</body>
+</html>
