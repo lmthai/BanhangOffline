@@ -12,7 +12,6 @@ namespace BanhangOffline
 {
     public partial class _default : System.Web.UI.Page
     {
-        public static DataTable tbGioHang = new DataTable();
         int SP_ID;
         SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["ShopConnection"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
@@ -21,19 +20,19 @@ namespace BanhangOffline
             {
                 if (Session["GioHang"] != null)
                 {
-                    tbGioHang = Session["GioHang"] as DataTable;
+                    DBClass.tbGioHang = Session["GioHang"] as DataTable;
                 }
                 else
                 {
-                    tbGioHang.Rows.Clear();
-                    tbGioHang.Columns.Clear();
-                    tbGioHang.Columns.Add("idSP", typeof(int));
-                    tbGioHang.Columns.Add("TenSP", typeof(string));
-                    tbGioHang.Columns.Add("Gia", typeof(decimal));
-                    tbGioHang.Columns.Add("SoLuong", typeof(int));
-                    tbGioHang.Columns.Add("TongTien", typeof(decimal), "SoLuong * Gia");
+                    DBClass.tbGioHang.Rows.Clear();
+                    DBClass.tbGioHang.Columns.Clear();
+                    DBClass.tbGioHang.Columns.Add("idSP", typeof(int));
+                    DBClass.tbGioHang.Columns.Add("TenSP", typeof(string));
+                    DBClass.tbGioHang.Columns.Add("Gia", typeof(decimal));
+                    DBClass.tbGioHang.Columns.Add("SoLuong", typeof(int));
+                    DBClass.tbGioHang.Columns.Add("TongTien", typeof(decimal), "SoLuong * Gia");
                 }
-                lbGiohang.Text = "Giỏ hàng (" + tbGioHang.Rows.Count + ")";
+                lbGiohang.Text = "Giỏ hàng (" + DBClass.tbGioHang.Rows.Count + ")";
                 DoGridView();
             }
         }
@@ -64,107 +63,24 @@ namespace BanhangOffline
             catch (Exception ex) { lblMessage.Text = "Error in Companies doGridView: " + ex.Message; }
             finally { myCon.Close(); }
         }
-        private void GetSanpham(int Comp_ID)
-        {
-            try
-            {
-                myCon.Open();
-                using (SqlCommand myCmd = new SqlCommand("dbo.usp_GetSanpham", myCon))
-                {
-                    myCmd.Connection = myCon;
-                    myCmd.CommandType = CommandType.StoredProcedure;
-                    myCmd.Parameters.Add("@ID", SqlDbType.Int).Value = Comp_ID;
-                    SqlDataReader myDr = myCmd.ExecuteReader();
-
-                    if (myDr.HasRows)
-                    {
-                        while (myDr.Read())
-                        {
-                            //txtSanphamName.Text = myDr.GetValue(1).ToString();
-                            //txtSanphamMa.Text = myDr.GetValue(2).ToString();
-                            //txtSanphamDVT.Text = myDr.GetValue(3).ToString();
-                            //txtDongia.Text = myDr.GetValue(4).ToString();
-                            //lblSPID.Text = Comp_ID.ToString();
-                            //Image1.ImageUrl= "~/Images/" + myDr.GetValue(5).ToString();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex) { lblMessage.Text = "Error in GetSanpham: " + ex.Message; }
-            finally { myCon.Close(); }
-        }
 
         protected void listSanphams_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "XemSanpham")
             {
                 SP_ID = Convert.ToInt32(e.CommandArgument);
-
-
-                //txtSanphamName.Text = "";
-                //txtSanphamMa.Text = "";
-                //txtSanphamDVT.Text = "";
-                //txtDongia.Text = "";
-
-                GetSanpham(SP_ID);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openSPDetail();", true);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openSPDetail(); });", true);
+                Response.Redirect("ViewSP.aspx?id=" + SP_ID);
             }
         }
         protected void ShowNhom(object sender, EventArgs e)
         {
-            // Get the currently selected item in the ListBox.
-            //string curItem = ListNhom.SelectedItem.ToString();
             DoGridView();
 
         }
-        //protected void btnChonSanpham_Click(object sender, EventArgs e)
-        //{
-        //    int idSP = int.Parse(lblSPID.Text);
-        //    string strTenSP = txtSanphamName.Text;
-        //    decimal Gia = decimal.Parse(txtDongia.Text);
-
-        //    foreach (DataRow row in tbGioHang.Rows)
-        //    {//Kiem tr neu mat hang da co roi thi tang so luong len 1
-        //        if ((int)row["idSP"] == idSP)
-        //        {
-        //            row["SoLuong"] = (int)row["SoLuong"] + 1;
-        //            goto GioHang;
-        //        }
-        //    }
-        //    tbGioHang.Rows.Add(idSP, strTenSP, Gia, 1);
-        //    GioHang:
-        //    lbGiohang.Text = "Giỏ hàng (" + tbGioHang.Rows.Count + ")";
-        //    Session["GioHang"] = tbGioHang;
-
-        //}
 
         protected void lbGiohang_Click(object sender, EventArgs e)
         {
-            //GridView1.DataSource = tbGioHang;
-            //GridView1.DataBind();
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openGiohang(); });", true);
-
-        }
-
-        //protected void GridView1_RowDeleting(Object sender, GridViewDeleteEventArgs e)
-        //{
-        //    //SP_ID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
-        //    tbGioHang.Rows[e.RowIndex].Delete();
-        //    lbGiohang.Text = "Giỏ hàng (" + tbGioHang.Rows.Count + ")";
-
-        //    GridView1.DataSource = tbGioHang;
-        //    GridView1.DataBind();
-        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$(function() { openGiohang(); });", true);
-        //}
-
-        protected void btnDathang_Click(object sender, EventArgs e)
-        {
-            string user = (string)Session["username"];
-            if (string.IsNullOrEmpty(user) == true)
-            {
-                Response.Redirect("Login.aspx");
-            }
+            Response.Redirect("Giohang.aspx");
         }
     }
 }

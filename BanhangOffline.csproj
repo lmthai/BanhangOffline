@@ -69,8 +69,12 @@
   <ItemGroup>
     <Content Include="css\site.css" />
     <Content Include="default.aspx" />
+    <Content Include="Giohang.aspx" />
     <Content Include="images\giaynam723089.jpg" />
     <Content Include="Login.aspx" />
+    <Content Include="Quanly.aspx" />
+    <Content Include="Sanpham.aspx" />
+    <Content Include="ViewSP.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +85,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Giohang.aspx.cs">
+      <DependentUpon>Giohang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Giohang.aspx.designer.cs">
+      <DependentUpon>Giohang.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -97,6 +108,27 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quanly.aspx.cs">
+      <DependentUpon>Quanly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quanly.aspx.designer.cs">
+      <DependentUpon>Quanly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sanpham.aspx.cs">
+      <DependentUpon>Sanpham.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sanpham.aspx.designer.cs">
+      <DependentUpon>Sanpham.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSP.aspx.cs">
+      <DependentUpon>ViewSP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSP.aspx.designer.cs">
+      <DependentUpon>ViewSP.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.Master" />

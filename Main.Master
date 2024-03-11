@@ -34,10 +34,9 @@
                 </div>
 
                 <div class="mycol-3">
-                    <h1>news</h1>
-                    <a href="#"><p>creating HTML website</p></a>
-                    <a href="#"><p>learn CSS</p></a>
-                    <a href="#">learn C#</a>
+                    <h1>Tin tức</h1>
+                    <a href="#"><p>Chương trình khuyến mãi</p></a>
+                    <a href="#"><p>Thi cuối kỳ</p></a>
                 </div>
             </div>
     </form>
