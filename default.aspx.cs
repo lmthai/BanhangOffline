@@ -13,7 +13,7 @@ namespace BanhangOffline
     public partial class _default : System.Web.UI.Page
     {
         int SP_ID;
-        SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["ShopConnection"].ConnectionString);
+        SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
